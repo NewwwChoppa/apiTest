@@ -50,7 +50,7 @@
                                 <connections>
                                     <outlet property="avatarImageView" destination="Iao-qd-eZc" id="b3G-p2-kcV"/>
                                     <outlet property="nameLabel" destination="a6t-Uh-DHy" id="JSx-tX-58n"/>
-                                    <segue destination="oTf-GB-g1U" kind="show" id="TvS-h2-E4X"/>
+                                    <segue destination="oTf-GB-g1U" kind="show" identifier="showUser" id="TvS-h2-E4X"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

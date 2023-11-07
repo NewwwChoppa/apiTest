@@ -10,22 +10,26 @@ import Kingfisher
 
 
 final class UserViewController: UIViewController {
-
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     private let networkManager = NetworkManager.shared
-    var user: User?
-    let emptyUser = User(id: 1000, firstName: "No", lastName: "Name")
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        composeUser(user ?? emptyUser)
+        composeUser(user)
     }
     
     private func composeUser(_ user: User) {
         nameLabel.text = "\(user.firstName) \(user.lastName)"
-        avatarImageView.kf.setImage(with: user.avatar)
+        if user.avatar != nil {
+            avatarImageView.kf.setImage(with: user.avatar)
+
+        } else {
+            avatarImageView.image = UIImage(systemName: "person.crop.circle")
+        }
     }
-    
 }
+

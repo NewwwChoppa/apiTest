@@ -106,7 +106,6 @@ extension UsersListViewController {
                 self?.users.remove(at: indexPath.row)
                 self?.tableView.deleteRows(at: [indexPath], with: .automatic)
             } else {
-//                self?.showAlert(with: )
                 return
             }
         }
@@ -120,7 +119,6 @@ extension UsersListViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserTableViewCell else { return UITableViewCell()}
-        
         cell.configure(with: users[indexPath.row])
         
         return cell
