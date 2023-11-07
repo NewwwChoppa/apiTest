@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol NewUserViewControllerDelegate {
     func createUser(user: User)
@@ -41,9 +42,9 @@ final class UsersListViewController: UITableViewController {
     }
     
     // MARK: - Private methods
-    private func showAlert(with networkError:NetworkError) {
+    private func showAlert(with networkError: AFError) {
         let alert = UIAlertController(
-            title: networkError.title,
+            title: networkError.localizedDescription,
             message: nil,
             preferredStyle: .alert
         )
@@ -100,12 +101,13 @@ extension UsersListViewController {
     }
     
     private func deleteUserWith(id: Int, at indexPath: IndexPath) {
-        Task {
-            if try await networkManager.deleteUserWith(id) {
-                users.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+        networkManager.deleteUserWith(id) { [weak self] successfully in
+            if successfully {
+                self?.users.remove(at: indexPath.row)
+                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
             } else {
-                showAlert(with: .deletingError)
+//                self?.showAlert(with: )
+                return
             }
         }
     }

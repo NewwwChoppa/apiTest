@@ -15,11 +15,12 @@ final class UserViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     private let networkManager = NetworkManager.shared
-    var user: User!
+    var user: User?
+    let emptyUser = User(id: 1000, firstName: "No", lastName: "Name")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        composeUser(user)
+        composeUser(user ?? emptyUser)
     }
     
     private func composeUser(_ user: User) {
